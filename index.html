@@ -2,6 +2,7 @@
 <html lang="en-US">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<title>Flat Colors</title>
   <style>
     body, h2 {
@@ -201,12 +202,15 @@
         var color = target.style.background;
 
         if (mode === "hex") {
-          var rgb = color.slice(4, -1).split(/[ ,]+/)
+          var rgb = color.split(')', 1)[0].slice(4, -1).split(/[ ,]+/);
           for (var i = 0; i < 3; i++) {
             rgb[i] = Number(rgb[i]).toString(16).padStart(2, '0');
           }
 
           color = '#' + rgb.join('');
+        }
+        else {
+          color = color.split(')', 1)[0] + ')';
         }
 
         navigator.clipboard.writeText(color);
