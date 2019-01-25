@@ -197,20 +197,16 @@
     document.onclick = function(e) {
       var target = e.target;
       if (target.className === "cell") {
-        var text = target.style.background;
         var mode = document.getElementById("mode").value;
-        var color = target.style.background;
+        var color = target.style['background-color'];
 
         if (mode === "hex") {
-          var rgb = color.split(')', 1)[0].slice(4, -1).split(/[ ,]+/);
+          var rgb = color.slice(4, -1).split(/[ ,]+/);
           for (var i = 0; i < 3; i++) {
             rgb[i] = Number(rgb[i]).toString(16).padStart(2, '0');
           }
 
           color = '#' + rgb.join('');
-        }
-        else {
-          color = color.split(')', 1)[0] + ')';
         }
 
         navigator.clipboard.writeText(color);
